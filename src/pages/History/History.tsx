@@ -1,4 +1,4 @@
-import { ButtonContainer, HistoryPageWrapper, WeatherCards } from "./styles";
+import { ButtonContainer, HistoryPageWrapper, NoSavedData, WeatherCards } from "./styles";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { weatherSliceSelectors,weatherSliceActions } from "../../store/redux/weather/weatherSlice";
 import WeatherInfo from "../../components/WeatherInfo/WeatherInfo";
@@ -22,12 +22,19 @@ function History() {
     />
   })
   return <HistoryPageWrapper key={v4()}>
-    <WeatherCards>{history}</WeatherCards>
-    {data.historyWeatherData.length > 0 && (
+    
+
+    {data.historyWeatherData.length > 0 ? (
   <ButtonContainer>
-    <Button name="Delete all cards" onClick={onDeleteAllCards}/>
+    <Button name="Delete all cards" onClick={onDeleteAllCards} isWeatherCard={false} />
   </ButtonContainer>
-  )}
+) : (
+  <NoSavedData>No saved data!</NoSavedData>
+)}
+
+
+  
+  <WeatherCards>{history}</WeatherCards>
   </HistoryPageWrapper>
 }
 export default History

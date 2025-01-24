@@ -77,8 +77,11 @@ export const weatherSlice = createAppSlice({
     }),
     deleteAllHistoryCard:create.reducer((state:WeatherSliceState)=>{
       state.data.historyWeatherData = []
+    }),
+    deleteErrorInfo: create.reducer((state:WeatherSliceState)=>{
+      state.error = undefined,
+      state.status='default'
     })
-
   }),
 
   selectors: {

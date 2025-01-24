@@ -19,6 +19,9 @@ function Home(){
   const {data,error,status} = useAppSelector(weatherSliceSelectors.weatherData)
   const {temp,city,icon} = data.weatherData
   const [inputValue, setInputValue] = useState<string>('');
+  const [onErrorDeleteButtonClick, setOnErrorDeleteButtonClick] = useState(false);
+  
+
 
   const onInputChange = (event:ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -35,16 +38,18 @@ function Home(){
   }
 }
 
+
   return(
     <HomePageWrapper>
       <InputContainer>
         <Input name="input-data" value={inputValue} placeholder="Colrado" onChange={onInputChange}/>
     
-        <ButtonWrapper><Button name='Search'onClick={onSearchClick}/></ButtonWrapper>
+        <ButtonWrapper><Button name='Search'onClick={onSearchClick} isWeatherCard={false}/></ButtonWrapper>
       </InputContainer>
       {status === "loading" && <Spinner/>}
      {status === "success" && temp !== undefined && <WeatherInfo  temp={temp} city={city} icon={icon} isHistory={false} id={""}/>}
-      {status === "error" && <WeatherInfoError message={error}/> }
+      {status === "error" &&  <WeatherInfoError message={error} />}
+
     </HomePageWrapper>
   )
 }
